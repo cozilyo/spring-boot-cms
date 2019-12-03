@@ -1,0 +1,29 @@
+server:
+  port: 8090
+#=======================================================================================================================
+
+spring:
+  #数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/cms?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #freemarker配置
+  freemarker:
+    template-loader-path: classpath:templates/
+    suffix: .ftl
+
+#=======================================================================================================================
+#mybatis配置
+
+#实体类位置
+#mapper的xml文件位置
+#开启驼峰命名规则
+mybatis:
+  type-aliases-package: com.cozi.springboot.pojo
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+#=======================================================================================================================

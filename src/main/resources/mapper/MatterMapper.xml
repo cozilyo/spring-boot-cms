@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.cozi.springboot.mapper.MatterMapper">
+     <insert id="insertMatter" parameterType="com.cozi.springboot.pojo.Matter">
+           INSERT INTO cms_matter
+           (owner,details,view,read_only,release_time,create_time,modify_time)
+           VALUES
+           (#{owner},#{details},#{view},#{readOnly},NOW(),NOW(),NOW())
+     </insert>
+    <update id="updateMatter" parameterType="com.cozi.springboot.pojo.Matter">
+            UPDATE cms_matter SET
+            <if test="owner!=null and owner!=''">
+                owner=#{owner},
+            </if>
+            <if test="details!=null and details!=''">
+                details=#{details},
+            </if>
+            <if test="readOnly!=null">
+                read_only=#{readOnly},
+            </if>
+            modify_time=NOW()
+            WHERE id=#{id}
+    </update>
+    <select id="selectOneMatter" parameterType="integer" resultType="int">
+            SELECT COUNT(id) FROM cms_matter WHERE id=#{id}
+    </select>
+    <delete id="deleteMatter" parameterType="integer">
+            DELETE FROM cms_matter WHERE id=#{id}
+    </delete>
+    <select id="selectMatter" resultType="com.cozi.springboot.pojo.Matter">
+            SELECT * FROM cms_matter
+    </select>
+</mapper>
